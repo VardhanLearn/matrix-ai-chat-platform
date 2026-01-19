@@ -18,3 +18,13 @@
 
 ### Install Docker + Compose
 
+```bash
+sudo apt update -y
+sudo apt install -y docker.io docker-compose nginx certbot python3-certbot-nginx
+sudo systemctl enable docker --now
+sudo usermod -aG docker ubuntu
+newgrp docker
+
+**Clone Repo**
+
+
