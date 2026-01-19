@@ -25,6 +25,11 @@ sudo systemctl enable docker --now
 sudo usermod -aG docker ubuntu
 newgrp docker
 
-**Clone Repo**
+Clone Repo
+
+git clone https://github.com/<your-username>/matrix-ai-chat-platform.git
+cd matrix-ai-chat-platform
+cp .env.example .env
+
 
 
