@@ -26,8 +26,10 @@ newgrp docker
 
 **Clone Repo**
 
-git clone https://github.com/<your-username>/matrix-ai-chat-platform.git
+git clone https://github.com/VardhanLearn/matrix-ai-chat-platform.git
+
 cd matrix-ai-chat-platform
+
 cp .env.example .env
 
 **Run Stack**
@@ -39,11 +41,11 @@ docker ps
 
 Update domain DNS:
 
-chat.yourdomain.com -> EC2 IP
+chat.myappraoch.online -> EC2 IP
 
 Then:
 
-sudo certbot --nginx -d chat.yourdomain.com
+sudo certbot --nginx -d chat.myappraoch.online
 
 ## 3) Verify Services
 
