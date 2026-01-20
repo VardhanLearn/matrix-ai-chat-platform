@@ -1,55 +1,118 @@
-# Matrix AI Chat Platform (AWS EC2 + Docker + Synapse + NextJS + FAISS)
+# Matrix AI Chat Platform (Full Stack) 🚀
+A production-style full-stack chat system deployed using Docker on AWS EC2.
 
-## Features
-- Matrix Synapse Chat Server
-- NextJS Frontend UI
-- NodeJS Backend API
-- NLP Service (HuggingFace embeddings + FAISS vector search)
-- NGINX Reverse Proxy
+<img width="1111" height="733" alt="Architecture Daigram" src="https://github.com/user-attachments/assets/97836cc1-52dc-4776-bd47-af4a5ac2898d" />
+
+
+This project proves hands-on skills in:
+- Docker & Linux
+- AWS EC2 deployment
+- Matrix Synapse server setup
+- Bridge integration (extensible)
+- React / NextJS frontend
+- Backend API integration
+- NLP Search service (HuggingFace + FAISS)
 
 ---
 
-## 1) Deploy on AWS EC2
+## 📌 Project Overview
+This project deploys a full-stack architecture where:
 
-### Launch EC2
-- Ubuntu 22.04
-- Open Ports: 22,80,443,8448
-- Attach Elastic IP
+✅ Matrix Synapse works as the chat server  
+✅ NextJS provides a simple web UI frontend  
+✅ NodeJS backend provides APIs  
+✅ Python NLP service provides embedding/search endpoint  
+✅ PostgreSQL stores Synapse data  
+✅ Everything runs inside Docker containers using Docker Compose  
+✅ Can be deployed with:
+- **EC2 Public IP (testing)** OR
+- **Domain + NGINX + SSL (production)**
 
-### Install Docker + Compose
+---
 
-sudo apt update -y
-sudo apt install -y docker.io docker-compose nginx certbot python3-certbot-nginx
-sudo systemctl enable docker --now
-sudo usermod -aG docker ubuntu
-newgrp docker
+## 🏗️ Architecture
 
-**Clone Repo**
+User Browser
+|
+|--> NextJS Frontend (3000)
+|--> Backend API (5000)
+|--> NLP Service (7000)
+|
+Docker Compose on AWS EC2
+|
+|--> Synapse (8008)
+|--> PostgreSQL (DB)
 
-git clone https://github.com/VardhanLearn/matrix-ai-chat-platform.git
 
-cd matrix-ai-chat-platform
+---
 
-cp .env.example .env
+## ✅ Features
+- Matrix Synapse chat server with PostgreSQL
+- NextJS frontend running in Docker
+- NodeJS backend API
+- Python NLP service (Flask)
+- Fully containerized stack
+- AWS EC2 deployment steps included
 
-**Run Stack**
+---
 
-docker compose up -d
-docker ps
+## 🧰 Tech Stack
+| Layer | Technology |
+|------|------------|
+| Infra | AWS EC2 (Ubuntu 22.04) |
+| Containers | Docker, Docker Compose |
+| Chat Server | Matrix Synapse |
+| Database | PostgreSQL |
+| Frontend | React / NextJS |
+| Backend | NodeJS Express |
+| NLP | Python Flask (HuggingFace + FAISS optional) |
+| Reverse Proxy (optional) | NGINX + SSL |
 
-## 2) SSL Setup
+---
 
-Update domain DNS:
+# ✅ Prerequisites
 
-chat.myappraoch.online -> EC2 IP
+## AWS Requirements
+- AWS Account
+- 1 EC2 instance (Ubuntu 22.04)
+  - Recommended: `t3.medium` or `t3.large`
+  - Storage: 30GB
 
-Then:
+## Security Group Inbound Rules
+✅ For testing deployment (IP-based):
+| Port | Purpose |
+|------|---------|
+| 22 | SSH |
+| 3000 | Frontend |
+| 5000 | Backend |
+| 7000 | NLP |
+| 8008 | Matrix Synapse |
 
-sudo certbot --nginx -d chat.myappraoch.online
+✅ For production (Domain + NGINX + SSL):
+| Port | Purpose |
+|------|---------|
+| 22 | SSH |
+| 80 | HTTP |
+| 443 | HTTPS |
+| 8448 | Matrix Federation (optional) |
 
-## 3) Verify Services
+---
 
-<img width="480" height="270" alt="Screenshot from 2026-01-19 17-57-45" src="https://github.com/user-attachments/assets/0a7e0af1-27c6-4e5a-9530-8c531b6fa2e3" />
+# 🚀 Deployment (Testing Without Domain)
+
+## Step 1: SSH into EC2
+```bash
+ssh -i your-key.pem ubuntu@EC2_PUBLIC_IP
+
+
+Step 2: Install Docker + Compose
+
+
+
+
+
+
+
 
 
 
