@@ -1,0 +1,11 @@
+database:
+  name: psycopg2
+  args:
+    user: synapse
+    password: synapsepass
+    database: synapse
+    host: postgres
+    cp_min: 5
+    cp_max: 10
+enable_registration: true
+
