@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: synapse-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: synapse
+      POSTGRES_PASSWORD: synapsepass
+      POSTGRES_DB: synapse
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: synapse
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      SYNAPSE_SERVER_NAME: matrix.yourdomain.com
+      SYNAPSE_REPORT_STATS: "no"
+      SYNAPSE_CONFIG_PATH: /data/homeserver.yaml
+    volumes:
+      - ./data/synapse:/data
+    ports:
+      - "8008:8008"
+      - "8448:8448"
+
+  frontend:
+    image: node:20
+    container_name: nextjs-frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm run build && npm start"
+    restart: always
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+
+  backend:
+    image: node:20
+    container_name: backend-api
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: sh -c "npm install && node index.js"
+    restart: always
+    environment:
+      - PORT=5000
+    ports:
+      - "5000:5000"
+
+  nlp:
+    image: python:3.11
+    container_name: nlp-faiss
+    working_dir: /app
+    volumes:
+      - ./nlp:/app
+    command: sh -c "pip install -r requirements.txt && python app.py"
+    restart: always
+    ports:
+      - "7000:7000"
