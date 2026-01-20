@@ -1,7 +1,8 @@
 # Matrix AI Chat Platform (Full Stack) 🚀
 A production-style full-stack chat system deployed using Docker on AWS EC2.
 
-<img width="1111" height="733" alt="Architecture Daigram" src="https://github.com/user-attachments/assets/97836cc1-52dc-4776-bd47-af4a5ac2898d" />
+<img width="1074" height="714" alt="Screenshot from 2026-01-20 16-16-09" src="https://github.com/user-attachments/assets/61cb77b6-9f8e-4351-8d2e-b944ee5b87f0" />
+
 
 
 This project proves hands-on skills in:
