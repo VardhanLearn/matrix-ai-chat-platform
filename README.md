@@ -119,7 +119,7 @@ docker-compose --version
 
 **Step 3: Clone Repo**
 
-git clone https://github.com/<your-username>/matrix-ai-chat-platform.git
+git clone https://github.com/VardhanLearn/matrix-ai-chat-platform.git
 cd matrix-ai-chat-platform
 
 **Step 4: Configure Docker Compose**
