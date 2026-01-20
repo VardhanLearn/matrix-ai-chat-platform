@@ -143,6 +143,7 @@ docker run -it --rm \
 nano data/synapse/homeserver.yaml
 
 ✅ Update DB section:
+
 database:
   name: psycopg2
   args:
@@ -152,10 +153,13 @@ database:
     host: postgres
     cp_min: 5
     cp_max: 10
+
 also 
+
 ✅ Enable registration for testing:
 enable_registration: true
 save the file.
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 **Step 6: Start Project**
