@@ -102,15 +102,80 @@ Docker Compose on AWS EC2
 # 🚀 Deployment (Testing Without Domain)
 
 ## Step 1: SSH into EC2
-```bash
+
 ssh -i your-key.pem ubuntu@EC2_PUBLIC_IP
 
 
-Step 2: Install Docker + Compose
+**Step 2: Install Docker + Compose**
 
+sudo apt update -y
+sudo apt install -y docker.io docker-compose git
+sudo systemctl enable docker --now
+sudo usermod -aG docker ubuntu
+newgrp docker
 
+&& docker --version
+docker-compose --version
 
+**Step 3: Clone Repo**
 
+git clone https://github.com/<your-username>/matrix-ai-chat-platform.git
+cd matrix-ai-chat-platform
+
+**Step 4: Configure Docker Compose**
+
+Edit docker-compose and replace EC2_PUBLIC_IP with your public IP.
+
+nano docker-compose.yml
+
+**Step 5: Generate Matrix Synapse Config**
+mkdir -p data/synapse data/postgres
+
+**Generate config:**
+
+docker run -it --rm \
+  -v $(pwd)/data/synapse:/data \
+  -e SYNAPSE_SERVER_NAME=EC2_PUBLIC_IP \
+  -e SYNAPSE_REPORT_STATS=no \
+  matrixdotorg/synapse:latest generate
+
+**Edit config:**
+nano data/synapse/homeserver.yaml
+
+✅ Update DB section:
+database:
+  name: psycopg2
+  args:
+    user: synapse
+    password: synapsepass
+    database: synapse
+    host: postgres
+    cp_min: 5
+    cp_max: 10
+also 
+✅ Enable registration for testing:
+enable_registration: true
+save the file.
+------------------------------------------------------------------------------------------------------------------------------
+
+**Step 6: Start Project**
+
+docker-compose up -d
+docker ps
+
+**Step 7: Validate Services**
+
+✅ Frontend
+http://EC2_PUBLIC_IP:3000
+
+✅ Backend API
+http://EC2_PUBLIC_IP:5000/health
+
+✅ NLP Service
+http://EC2_PUBLIC_IP:7000/health
+
+✅ Synapse Versions
+http://EC2_PUBLIC_IP:8008/_matrix/client/versions
 
 
 
